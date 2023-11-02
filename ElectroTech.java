@@ -2,10 +2,10 @@
 Kevin Josué Villagrán Mérida - 23584
 Ejercicio #6 
 Fecha de creación: 1/11/2023 14:15
-Fecha de ultima modificación: 17/10/2023 18:06
+Fecha de ultima modificación: 1/11/2023 18:06
 */
 
-import java.util.*;
+import java.util.*;//Importamos las librerias
 import java.io.*;
 
 public class ElectroTech{
@@ -14,7 +14,7 @@ public class ElectroTech{
         Scanner scan = new Scanner(System.in);
         ArrayList<DispositivoElectronico> dispositivos;
 
-        dispositivos = cargarCSV("dispositivos_electrotech.csv");
+        dispositivos = cargarCSV("dispositivos_electrotech.csv");//Cargamos el CSV en una unica lista de dispositivos electronicos
 
         boolean salir = false;//Permite salir del programa
         String seleccion;
@@ -53,14 +53,13 @@ public class ElectroTech{
 
     public static void registrarDispositivo(ArrayList<DispositivoElectronico> dispositivos){
         Scanner scan = new Scanner(System.in);
-        boolean anException = false;
         String input;
 
         System.out.println("\n=== Registro de dispositivos ===");
         System.out.println("¿Que tipo dispositivo deseas registrar? 1. Computadora, 2. Telefono");        
         input = scan.nextLine();
 
-        switch(input){
+        switch(input){//Segun el dispositivo que el usuario desea registrar, se hace lo siguiente
             case "1":
                 System.out.println("\nIngrese la marca de la computadora: ");
                 input = scan.nextLine();
@@ -68,7 +67,7 @@ public class ElectroTech{
                 
                 System.out.println("\n¿Desea encender el dispositivo? 1. Si, 2. No");
                 input = scan.nextLine();
-                switch(input){
+                switch(input){//En caso de que desee encenderlo, se encendera, de lo contrario pues no
                     case "1":
                         computadora.encender();
                         break;
@@ -80,7 +79,7 @@ public class ElectroTech{
                         break;
                 }
 
-                dispositivos.add(computadora);
+                dispositivos.add(computadora);//Se agrega el dispositivo a la lista
                 System.out.println("\nComputadora registrada correctamente... ");
                 break;
             case "2":
@@ -90,7 +89,7 @@ public class ElectroTech{
                 
                 System.out.println("\n¿Desea encender el dispositivo? 1. Si, 2. No");
                 input = scan.nextLine();
-                switch(input){
+                switch(input){//En caso de que desee encenderlo, se encendera, de lo contrario pues no
                     case "1":
                         telefono.encender();
                         break;
@@ -102,7 +101,7 @@ public class ElectroTech{
                         break;
                 }
 
-                dispositivos.add(telefono);
+                dispositivos.add(telefono);//Se agrega el dispositivo a la lista
                 System.out.println("\nTelefono registrado correctamente... ");
                 break;
             default:
@@ -118,14 +117,14 @@ public class ElectroTech{
 
     public static void verEncendidosApagados(ArrayList<DispositivoElectronico> dispositivos){
         System.out.println("\n=== Dispositivos que se encuentran apagados ===");
-        for(DispositivoElectronico dispositivo : dispositivos){
-            if(dispositivo.verificarEncendido().equals("Apagado"))
+        for(DispositivoElectronico dispositivo : dispositivos){//Recorre la lista de dispositivos
+            if(dispositivo.verificarEncendido().equals("Apagado"))//Busca todos los que esten apagados y los muestra en pantalla
                 System.out.println(dispositivo);
         }
 
         System.out.println("\n=== Dispositivos que se encuentran encendidos ===");
-        for(DispositivoElectronico dispositivo : dispositivos){
-            if(dispositivo.verificarEncendido().equals("Encendido"))
+        for(DispositivoElectronico dispositivo : dispositivos){//Recorre la lista de dispositivos
+            if(dispositivo.verificarEncendido().equals("Encendido"))//Busca todos los que esten encendidos y los muestra en pantalla
                 System.out.println(dispositivo);
         }
     }
@@ -134,65 +133,65 @@ public class ElectroTech{
         ArrayList<DispositivoElectronico> dispositivos = new ArrayList<DispositivoElectronico>();
 
         try{
-            Scanner scan = new Scanner(new File(path));
+            Scanner scan = new Scanner(new File(path));//Se lee el archivo CSV
             scan.useDelimiter(";");
 
-            if(scan.hasNextLine()){
+            if(scan.hasNextLine()){//Se salta la linea de titulos
                 scan.nextLine();
             }
 
-            while(scan.hasNextLine()){
-                String[] dispositivosData = scan.nextLine().split(";");
+            while(scan.hasNextLine()){a
+                String[] dispositivosData = scan.nextLine().split(";");//Se separa cada casill
 
                 switch(dispositivosData[0]){
-                    case "Computadora":
+                    case "Computadora"://En caso de que el dispositivo sea una computadora
                         Computadora computadora = new Computadora(dispositivosData[1]);
-                        if(dispositivosData[3].equals("Encendido"))
+                        if(dispositivosData[3].equals("Encendido"))//Si esta encendido en el CSV, instanciamos el objeto y lo encendemos
                             computadora.encender();
                         
-                        dispositivos.add(computadora);
+                        dispositivos.add(computadora);//Se agrega el dispositivo a la lista
                         break;
                     case "Telefono":
                         Telefono telefono = new Telefono(dispositivosData[2]);
-                        if(dispositivosData[3].equals("Encendido"))
+                        if(dispositivosData[3].equals("Encendido"))//Si esta encendido en el CSV, instanciamos el objeto y lo encendemos
                             telefono.encender();
 
-                        dispositivos.add(telefono);
+                        dispositivos.add(telefono);//Se agrega el dispositivo a la list
                         break;
                 }
             }
 
         System.out.println("Archivo de dispositivos cargados correctamente...");
 
-        }catch(Exception e){
+        }catch(Exception e){//Si no se puede cargar el archivo, se mostrara el siguiente mensaje
             System.out.println("\nNo se ha podido cargar el archivo, puede que todavia no exista...");
             System.out.println("Motivo: " + e);
         }
 
-        return dispositivos;
+        return dispositivos;//Retornamos el valor de la lista, el cual se le asigna a la lista general
     }
 
     public static void guardarCSV(ArrayList<DispositivoElectronico> dispositivos){
-        File archivoCSV = new File("dispositivos_electrotech.csv");
+        File archivoCSV = new File("dispositivos_electrotech.csv");//Se prepara el archivo que se creara
 
         try{
-            PrintWriter out = new PrintWriter(archivoCSV);
+            PrintWriter out = new PrintWriter(archivoCSV);//Para escribir en el archivo
 
             String[] titulos = {"Dispositivo", "Marca", "Modelo","Estado"};
 
             for(String titulo : titulos)
-                out.print(titulo + ";");
+                out.print(titulo + ";");//Escribimos los titulos
 
             out.println();
 
             for(DispositivoElectronico dispositivo : dispositivos){
-                out.println(dispositivo.getDatos());
+                out.println(dispositivo.getDatos());//Por cada dispositivo en la lista, se escriben sus respectivos datos en el CSV
             }
 
-            out.close();
+            out.close();//Cerramos y guardamos el archivo
 
             System.out.println("\nArchivo csv guardado correctamente....");
-        }catch(FileNotFoundException e){
+        }catch(FileNotFoundException e){//En caso de que no se pueda crear
             System.out.println("No se ha encontrado el archivo");
         }
     }

@@ -2,7 +2,7 @@
 Kevin Josué Villagrán Mérida - 23584
 Ejercicio #6 
 Fecha de creación: 1/11/2023 14:15
-Fecha de ultima modificación: 17/10/2023 18:06
+Fecha de ultima modificación: 1/11/2023 18:06
 */
 public class Computadora implements DispositivoElectronico{
 
@@ -36,7 +36,7 @@ public class Computadora implements DispositivoElectronico{
     }
 
     @Override
-    public String getDatos(){//Se define
+    public String getDatos(){//Se define el nuevo metodo para pasar los datos al CSV
         return "Computadora;"+marca+";;"+verificarEncendido();
     }
 }
