@@ -140,7 +140,7 @@ public class ElectroTech{
                 scan.nextLine();
             }
 
-            while(scan.hasNextLine()){a
+            while(scan.hasNextLine()){
                 String[] dispositivosData = scan.nextLine().split(";");//Se separa cada casill
 
                 switch(dispositivosData[0]){
